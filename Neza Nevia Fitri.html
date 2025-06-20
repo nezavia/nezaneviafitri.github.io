@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Visualisasi Interaktif</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #A7D7F9, #FBC4C4);
+      color: #333;
+    }
+
+    .header {
+      background-color: #fff;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+       background: linear-gradient(to right, #A7D7F9, #FBC4C4);
+    }
+
+    .container {
+      display: flex;
+      margin-top: 60px;
+    }
+
+    .sidebar {
+      width: 190px;
+      background-color: #FCEEF2;
+      padding: 15px 10px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      height: calc(100vh - 60px);
+      position: fixed;
+      top: 60px;
+      left: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin: 6px 0;
+      padding: 8px;
+      border: none;
+      background-color: #ffffff;
+      color: #444;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #ffe1e1;
+    }
+
+    .main {
+      margin-left: 210px;
+      padding: 15px 25px 25px 25px;
+      flex-grow: 1;
+    }
+
+    #vizContainer {
+      width: 100%;
+      min-height: 800px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Dashboard - Neza Nevia Fitri</div>
+
+  <div class="container">
+    <div class="sidebar">
+      <button onclick="loadViz('Dashboard1')">Dashboard</button>
+      <button onclick="loadViz('barchart')">Bar Chart</button>
+      <button onclick="loadViz('linechart')">Line Chart</button>
+      <button onclick="loadViz('piechart')">Pie Chart</button>
+      <button onclick="loadViz('mapchart')">Map Chart</button>
+      <button onclick="loadViz('scaterchart')">Scatter Chart</button>
+      <button onclick="loadViz('bubblechart')">Bubble Chart</button>
+      <button onclick="loadViz('treemap')">Tree Map</button>
+      <button onclick="loadViz('ganttchart')">Gantt Chart</button>
+      <button onclick="loadViz('lollypopchart')">Lollypop Chart</button>
+      <button onclick="loadViz('wordcould')">Word Cloud</button>
+      <button onclick="loadViz('boxplot')">Box Plot</button>
+      <button onclick="loadViz('historygramchart')">Histogram Chart</button>
+    </div>
+
+    <div class="main">
+      <div id="vizContainer"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <script>
+    let viz;
+
+    function loadViz(sheetName) {
+      const url = `https://public.tableau.com/views/nezaneviafitri2431052/${sheetName}`;
+      const containerDiv = document.getElementById("vizContainer");
+
+      const options = {
+        hideTabs: true,
+        hideToolbar: false
+      };
+
+      if (viz) {
+        viz.dispose();
+      }
+
+      viz = new tableau.Viz(containerDiv, url, options);
+    }
+
+    window.onload = () => {
+      loadViz("Dashboard1");
+    };
+  </script>
+
+</body>
+</html>
